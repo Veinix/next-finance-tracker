@@ -5,7 +5,8 @@ export enum ButtonThemes {
     Caution = "Caution",
     Success = "Success",
     Info = "Info",
-    Basic = "Basic"
+    Basic = "Basic",
+    Custom = "Custom"
 }
 
 export enum ButtonSizes {
@@ -24,10 +25,14 @@ export interface BasicButtonProps {
     theme: keyof typeof ButtonThemes,
     text: string,
     size: keyof typeof ButtonSizes,
-    action?: (any?: any) => void
+    action?: (any?: any) => void,
+    customTheme?: string
 }
 
-export default function BasicButton({ theme = ButtonThemes.Basic, text, size, action }: BasicButtonProps) {
+export default function BasicButton({ theme = ButtonThemes.Basic, text = "Default Text", size = ButtonSizes.Small, action, customTheme }: BasicButtonProps) {
+
+    const commonStyle = "border-black border"
+
     let selectedTheme = ""
     switch (theme) {
         case ButtonThemes.Success:
@@ -45,6 +50,8 @@ export default function BasicButton({ theme = ButtonThemes.Basic, text, size, ac
         case ButtonThemes.Basic:
             selectedTheme = "bg-indigo-500 font-bold text-white hover:bg-indigo-700 active:bg-indigo-900"
             break;
+        case ButtonThemes.Custom:
+            selectedTheme = ""
     }
 
     let selectedSize = ""
@@ -64,7 +71,7 @@ export default function BasicButton({ theme = ButtonThemes.Basic, text, size, ac
     }
 
     return (
-        <button className={`${selectedTheme} ${selectedSize} sm:m-2`} onClick={action}>
+        <button className={` ${selectedTheme} ${customTheme} ${selectedSize}`} onClick={action}>
             <p>{text}</p>
         </button>
     )

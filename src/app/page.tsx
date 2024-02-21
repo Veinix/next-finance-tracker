@@ -1,8 +1,9 @@
 
 export default function Home() {
-  return (
-    <>
-        <h2> Homepage </h2>
-    </>
-  );
+    return (
+        <div className="pt-2 px-4 flex flex-col gap-y-2">
+            <h2 className="flex self-center"> Homepage </h2>
+
+        </div>
+    );
 }
